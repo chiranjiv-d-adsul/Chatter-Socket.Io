@@ -1,4 +1,6 @@
+require('dotenv').config()
 const path = require('path');
+
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
@@ -20,9 +22,9 @@ io.on('connection', socket => {
         const user = userJoin(socket.id, username,room);
 
         socket.join(user.room);
-        
+
         // when client is connected single client
-    socket.emit('message' , formatMessage(botName,'Welcome to chatter!'));
+    socket.emit('message' , formatMessage(botName,'Welcome'))
 
     // when user is connect all of the client accept the client to the connecting
     socket.broadcast
@@ -44,7 +46,7 @@ io.on('connection', socket => {
         io.to(user.room).emit('message' ,  formatMessage(`${user.username}`,msg));
     });
 
-    
+
     // io.emit all the client to connect
     socket.on('disconnect' , () =>{
         const user = userLeave(socket.id);
@@ -54,9 +56,9 @@ io.on('connection', socket => {
       io.to(user.room).emit("roomUsers", {
         room: user.room,
         users: getRoomUsers(user.room),
-      });    
+      });
         }
-      
+
     });
 });
 const PORT = 3000 || process.env.PORT;
