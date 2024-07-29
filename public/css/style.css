@@ -121,7 +121,7 @@ a {
 
 .chat-form-container {
   padding: 20px 30px;
-  background-color: var(--secondary-color);
+    background-color: var(--secondary-color);
 }
 
 .chat-form-container form {
